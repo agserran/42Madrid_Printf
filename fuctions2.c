@@ -9,36 +9,43 @@
 /*   Updated: 2022/09/12 17:03:12 by agserran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include <unistd.h>
+#include "libftprintf.h"
 
-int ft_putchar(char c)
+int	ft_putnbr_base(int nb, char *b)
+{
+	static int		i;
+	int				len;
+
+	i = 0;
+	len = ft_strlen(b);
+	write(1, "bonjour", 7);
+	if (nb >= len)
+	{
+		ft_putnbr_base(nb / len, b);
+		nb = nb % len;
+	}
+	i++;
+	ft_putchar(b[nb]);
+	return (i);
+}
+
+int	ft_strlen(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while (*str != '\0')
+		i++;
+	return (i);
+}
+
+int	ft_putchar(int c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	ft_putnbr_base(size_t nb, char *b)
-{
-	static int		i;
-
-	i = 0;
-	if (nb > ft_strlen(b))
-	{
-		ft_putnbr_base(nb / ft_strlen(b), b);
-		nb = nb % ft_strlen(b);
-	}
-	i++;
-	ft_putchar(b[nb]);
-	return (i);
+int	main(void){
+	ft_putnbr_base(500, "0123456789");
+	return 0;
 }

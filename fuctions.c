@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prinftf.h"
+#include "libftprintf.h"
 
 int	ft_putchar(int c)
 {
@@ -32,7 +32,7 @@ int	ft_putstr(char	*str)
 {
 	if (!str)
 	{
-		ft_putstre("(null)");
+		ft_putstr("(null)");
 		return (6);
 	}
 	write (1, str, ft_strlen(str));
@@ -42,7 +42,7 @@ int	ft_putstr(char	*str)
 int	ft_putnbr(int nb)
 {
 	int	i;
-	
+
 	if (nb == -2147483648)
 	{
 		write(1, "-2147483648", 11);
@@ -63,4 +63,24 @@ int	ft_putnbr(int nb)
 	if (nbr < 0)
 		i++;
 	return (i);
+}
+
+int	ft_putnbr_base(int nb, char *b)
+{
+	static int		i;
+
+	i = 0;
+	if (nb > ft_strlen(b))
+	{
+		ft_putnbr_base(nb / ft_strlen(b), b);
+		nb = nb % ft_strlen(b);
+	}
+	i++;
+	write(1, &b[nb], 1);
+	return (i);
+}
+
+int	main(void){
+	ft_putnbr_base(500, "0123456789abcdef");
+	return 0;
 }
