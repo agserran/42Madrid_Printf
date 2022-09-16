@@ -46,12 +46,11 @@ int	ft_putnbr(int nb)
 	if (nb == -2147483648)
 	{
 		write(1, "-2147483648", 11);
-		return ;
 	}
 	if (nb < 0)
 	{
 		write(1, "-", 1);
-		nb = 0 - nb;
+		nb *= -1;
 	}
 	if (nb > 9)
 	{
@@ -60,7 +59,7 @@ int	ft_putnbr(int nb)
 	}
 	i++;
 	ft_putchar(nb + 48);
-	if (nbr < 0)
+	if (nb < 0)
 		i++;
 	return (i);
 }

@@ -10,3 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
+
+int	ft_pointer(void *p)
+{
+	int n;
+	int	len;
+
+	len = 0;
+	n = (int)p;
+	write(1, "0x", 2);
+	len = len + ft_putnbr_base(n, "0123456789ABCDEF");
+	return (len + 2);
+}

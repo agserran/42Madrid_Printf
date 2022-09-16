@@ -23,4 +23,6 @@ int			ft_putstr(char	*str);
 int			ft_putnbr(int nb);
 int			ft_putnbr_base(int nb, char *b);
 static int	type(va_list arguments, char format);
+int			ft_pointer(void *p);
+
 # endif
