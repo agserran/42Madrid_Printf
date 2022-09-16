@@ -23,7 +23,7 @@ int	ft_strlen(char	*str)
 	int	i;
 
 	i = 0;
-	while (*str != '\0')
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -78,9 +78,4 @@ int	ft_putnbr_base(int nb, char *b)
 	i++;
 	write(1, &b[nb], 1);
 	return (i);
-}
-
-int	main(void){
-	ft_putnbr_base(500, "0123456789abcdef");
-	return 0;
 }
