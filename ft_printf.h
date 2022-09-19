@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fuctions2.c                                        :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agserran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 10:16:17 by agserran          #+#    #+#             */
-/*   Updated: 2022/09/19 18:35:36 by agserran         ###   ########.fr       */
+/*   Created: 2022/09/16 17:47:13 by agserran          #+#    #+#             */
+/*   Updated: 2022/09/19 18:36:06 by agserran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
 
-int	ft_pointer(void *p)
-{
-	size_t	n;
-	int		len;
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-	len = 0;
-	n = (size_t)p;
-	len = write(1, "0x", 2);
-	len = len + ft_puthexa(n);
-	return (len);
-}
+# include <stdio.h>
+# include <unistd.h>
+# include <stdarg.h>
 
-int	ft_puthexa(unsigned long int nbr)
-{
-	char		*base;
-	static int	i;
+int						ft_putchar(int c);
+unsigned int			ft_strlen(char	*str);
+int						ft_putstr(char	*str);
+int						ft_putnbr(int nb);
+int						ft_putnbr_base(unsigned int nb, char *b);
+int						ft_pointer(void *p);
+int						ft_printf(const char *str, ...);
+int						ft_puthexa(unsigned long int nbr);
 
-	i = 0;
-	base = "0123456789abcdef";
-	if (nbr >= 16)
-	{
-		ft_puthexa(nbr / 16);
-		nbr = nbr % 16;
-	}
-	i++;
-	ft_putchar(base[nbr]);
-	return (i);
-}
+#endif

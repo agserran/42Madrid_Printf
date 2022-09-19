@@ -1,13 +1,15 @@
 FILES = ft_printf.c \
 		fuctions.c \
-		fuctions2.c \
+		fuctions2.c 
 OBJS = $(FILES:.c=.o)
 
 NAME = libftprintf.a
 
 CFLAGS = -Wall -Werror -Wextra
 
-LIB = libftprintf.h
+CC = gcc
+
+LIB = ft_printf.h
 
 all: $(NAME)
 

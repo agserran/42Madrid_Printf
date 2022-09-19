@@ -6,11 +6,11 @@
 /*   By: agserran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:05:48 by agserran          #+#    #+#             */
-/*   Updated: 2022/09/09 10:16:12 by agserran         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:35:06 by agserran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(int c)
 {
@@ -18,7 +18,7 @@ int	ft_putchar(int c)
 	return (1);
 }
 
-int	ft_strlen(char	*str)
+unsigned int	ft_strlen(char	*str)
 {
 	int	i;
 
@@ -41,40 +41,41 @@ int	ft_putstr(char	*str)
 
 int	ft_putnbr(int nb)
 {
-	int	i;
+	static int	i;
+	long		nbr;
 
-	if (nb == -2147483648)
+	nbr = nb;
+	i = 0;
+	if (nbr < 0)
 	{
-		write(1, "-2147483648", 11);
+		ft_putchar('-');
+		nbr *= -1;
 	}
-	if (nb < 0)
+	if (nbr > 9)
 	{
-		write(1, "-", 1);
-		nb *= -1;
-	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putnbr(nbr / 10);
+		nbr = nbr % 10;
 	}
 	i++;
-	ft_putchar(nb + 48);
+	ft_putchar(nbr + '0');
 	if (nb < 0)
 		i++;
 	return (i);
 }
 
-int	ft_putnbr_base(int nb, char *b)
+int	ft_putnbr_base(unsigned int nb, char *b)
 {
 	static int		i;
+	size_t			nbr;
 
+	nbr = (size_t)nb;
 	i = 0;
-	if (nb > ft_strlen(b))
+	if (nbr >= ft_strlen(b))
 	{
-		ft_putnbr_base(nb / ft_strlen(b), b);
-		nb = nb % ft_strlen(b);
+		ft_putnbr_base(nbr / ft_strlen(b), b);
+		nbr = nbr % ft_strlen(b);
 	}
 	i++;
-	write(1, &b[nb], 1);
+	ft_putchar(b[nbr]);
 	return (i);
 }
